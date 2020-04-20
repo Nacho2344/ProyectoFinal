@@ -11,6 +11,11 @@
 - Inicio Curso VueJS.
 - Examen JS Profesional.
 
+20/04
+- Fin del curso VueJS.
+- Examen VueJS.
+- Inicio Curso NodeJS y Express.
+
 Notas:
 
 12/04 
