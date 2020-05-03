@@ -1,0 +1,101 @@
+>
+>
+>
+>
+> use thoPhaseCommit
+switched to db thoPhaseCommit
+> db.cuentas.insert({_id:"A", balance: 600, transaccionesPendientes:[]})
+WriteResult({ "nInserted" : 1 })
+> db.cuentas.insert({_id:"B", balance: 900, transaccionesPendientes:[]})
+WriteResult({ "nInserted" : 1 })
+> db.cuentas.find()
+{ "_id" : "A", "balance" : 600, "transaccionesPendientes" : [ ] }
+{ "_id" : "B", "balance" : 900, "transaccionesPendientes" : [ ] }
+>
+> db.transacciones.insert({_id:1, fuente:"A", destino: "B", cantidad: 100, estado: "inicial"})
+WriteResult({ "nInserted" : 1 })
+> db.transaccion.find().pretty()
+> db.transacciones.find().pretty()
+{
+        "_id" : 1,
+        "fuente" : "A",
+        "destino" : "B",
+        "cantidad" : 100,
+        "estado" : "inicial"
+}
+> db.transacciones.update({_id:1},{$set:{estado:"pendiente"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.transacciones.find().pretty()
+{
+        "_id" : 1,
+        "fuente" : "A",
+        "destino" : "B",
+        "cantidad" : 100,
+        "estado" : "pendiente"
+}
+> db.cuentas.update({_id:"A"}, {$inc:{balance:-100}, $push:{transaccionesPendientes:1}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.cuentas.update({_id:"A"}, {$unset:{transaccionesPendientes:1}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.transacciones.find().pretty()
+{
+        "_id" : 1,
+        "fuente" : "A",
+        "destino" : "B",
+        "cantidad" : 100,
+        "estado" : "pendiente"
+}
+> db.cuentas.find().pretty()
+{ "_id" : "A", "balance" : 500 }
+{ "_id" : "B", "balance" : 900, "transaccionesPendientes" : [ ] }
+> db.cuentas.update({_id:"A"}, {$inc:{balance:-100}, $push:{transaccionesPendientes:1}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.cuentas.find().pretty()
+{ "_id" : "A", "balance" : 400, "transaccionesPendientes" : [ 1 ] }
+{ "_id" : "B", "balance" : 900, "transaccionesPendientes" : [ ] }
+> db.cuentas.update({_id: "A"}, {$inc:{balance:100}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.cuentas.find().pretty()
+{ "_id" : "A", "balance" : 500, "transaccionesPendientes" : [ 1 ] }
+{ "_id" : "B", "balance" : 900, "transaccionesPendientes" : [ ] }
+> db.cuentas.update({_id:"B"}, {$inc:{balance:100}, $push:{transaccionesPendientes:1}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.cuentas.find().pretty()
+{ "_id" : "A", "balance" : 500, "transaccionesPendientes" : [ 1 ] }
+{ "_id" : "B", "balance" : 1000, "transaccionesPendientes" : [ 1 ] }
+>
+> db.transacciones.update({_id:1}, {$set:{estado:"hecha"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.transacciones.find().pretty()
+{
+        "_id" : 1,
+        "fuente" : "A",
+        "destino" : "B",
+        "cantidad" : 100,
+        "estado" : "hecha"
+}
+>
+>
+>
+> db.cuentas.find().pretty()
+{ "_id" : "A", "balance" : 500, "transaccionesPendientes" : [ 1 ] }
+{ "_id" : "B", "balance" : 1000, "transaccionesPendientes" : [ 1 ] }
+>
+> db.cuentas.update({_id:"A"}, {$pull: {transaccionesPendientes:1 }})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.cuentas.update({_id:"B"}, {$pull: {transaccionesPendientes:1 }})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.cuentas.find().pretty()
+{ "_id" : "A", "balance" : 500, "transaccionesPendientes" : [ ] }
+{ "_id" : "B", "balance" : 1000, "transaccionesPendientes" : [ ] }
+> db.transacciones.update({_id:1}, {$set:{estado:"FIN"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.transacciones.find().pretty()
+{
+        "_id" : 1,
+        "fuente" : "A",
+        "destino" : "B",
+        "cantidad" : 100,
+        "estado" : "FIN"
+}
+>
