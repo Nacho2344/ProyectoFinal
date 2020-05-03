@@ -1,0 +1,145 @@
+> use openWebinars
+switched to db openWebinars
+>
+> var array = ["texto", 1, true, null]
+> array
+[ "texto", 1, true, null ]
+> use oneToOne
+switched to db oneToOne
+> db.articulos.insert({titulo: "Harry Potter", pages: 500, author: {name: "JKR", location: "UK"}})
+WriteResult({ "nInserted" : 1 })
+> db.articulos.find().pretty
+function() {
+    this._prettyShell = true;
+    return this;
+}
+> db.articulos.find().pretty()
+{
+        "_id" : ObjectId("5ea8382127e6c6228c50a0a6"),
+        "titulo" : "Harry Potter",
+        "pages" : 500,
+        "author" : {
+                "name" : "JKR",
+                "location" : "UK"
+        }
+}
+>
+>
+>
+> use oneToN
+switched to db oneToN
+> db.articulos.insert({ title:"Aprendiendo mongo con OpenWebinars", Content: "Openwebinars", comentarios: [{usuario: "Nacho", contenido: "Mola el curso"}, {usuario: "Paquito", contenido: "..."}]})
+WriteResult({ "nInserted" : 1 })
+> db.articulos.find().pretty()
+{
+        "_id" : ObjectId("5ea8392627e6c6228c50a0a7"),
+        "title" : "Aprendiendo mongo con OpenWebinars",
+        "Content" : "Openwebinars",
+        "comentarios" : [
+                {
+                        "usuario" : "Nacho",
+                        "contenido" : "Mola el curso"
+                },
+                {
+                        "usuario" : "Paquito",
+                        "contenido" : "..."
+                }
+        ]
+}
+>
+>
+> use oneToNReference
+switched to db oneToNReference
+> db.comentarios.insert([ {username:"nacho", contenido: "De lujo"}, {username: "paco", contenido: "Muy bien"}, {username: "curro", contenido: "Excelente"} ])
+BulkWriteResult({
+        "writeErrors" : [ ],
+        "writeConcernErrors" : [ ],
+        "nInserted" : 3,
+        "nUpserted" : 0,
+        "nMatched" : 0,
+        "nModified" : 0,
+        "nRemoved" : 0,
+        "upserted" : [ ]
+})
+> db.comentarios.find().pretty()
+{
+        "_id" : ObjectId("5ea83a4d27e6c6228c50a0a8"),
+        "username" : "nacho",
+        "contenido" : "De lujo"
+}
+{
+        "_id" : ObjectId("5ea83a4d27e6c6228c50a0a9"),
+        "username" : "paco",
+        "contenido" : "Muy bien"
+}
+{
+        "_id" : ObjectId("5ea83a4d27e6c6228c50a0aa"),
+        "username" : "curro",
+        "contenido" : "Excelente"
+}
+>
+> db.articulos.insert( {Titulo: "Ejemplo referenciado", comentarios: [ObjectId("5ea83a4d27e6c6228c50a0a8")]})
+WriteResult({ "nInserted" : 1 })
+> db.comentarios.find().pretty()
+{
+        "_id" : ObjectId("5ea83a4d27e6c6228c50a0a8"),
+        "username" : "nacho",
+        "contenido" : "De lujo"
+}
+{
+        "_id" : ObjectId("5ea83a4d27e6c6228c50a0a9"),
+        "username" : "paco",
+        "contenido" : "Muy bien"
+}
+{
+        "_id" : ObjectId("5ea83a4d27e6c6228c50a0aa"),
+        "username" : "curro",
+        "contenido" : "Excelente"
+}
+> db.articulos.find().pretty()
+{
+        "_id" : ObjectId("5ea83b4527e6c6228c50a0ab"),
+        "Titulo" : "Ejemplo referenciado",
+        "comentarios" : [
+                ObjectId("5ea83a4d27e6c6228c50a0a8")
+        ]
+}
+>
+> use NtoN
+switched to db NtoN
+> db.autores.insert([{username: "nachotab", edad: "32"}, {username:"pcampos", edad: 27}])
+BulkWriteResult({
+        "writeErrors" : [ ],
+        "writeConcernErrors" : [ ],
+        "nInserted" : 2,
+        "nUpserted" : 0,
+        "nMatched" : 0,
+        "nModified" : 0,
+        "nRemoved" : 0,
+        "upserted" : [ ]
+})
+> db.autores.find().pretty()
+{
+        "_id" : ObjectId("5ea83d4427e6c6228c50a0ac"),
+        "username" : "nachotab",
+        "edad" : "32"
+}
+{
+        "_id" : ObjectId("5ea83d4427e6c6228c50a0ad"),
+        "username" : "pcampos",
+        "edad" : 27
+}
+>
+> db.articulos.insert({titulo: "La casa por la ventana", autores: [ObjectId("5ea83d4427e6c6228c50a0ac"), ObjectId("5ea83d4427e6c6228c50a0ad")]}
+... )
+WriteResult({ "nInserted" : 1 })
+> db.articulos.find().pretty()
+{
+        "_id" : ObjectId("5ea83ea027e6c6228c50a0ae"),
+        "titulo" : "La casa por la ventana",
+        "autores" : [
+                ObjectId("5ea83d4427e6c6228c50a0ac"),
+                ObjectId("5ea83d4427e6c6228c50a0ad")
+        ]
+}
+>
