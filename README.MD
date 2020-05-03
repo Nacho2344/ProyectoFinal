@@ -22,6 +22,11 @@
 - Fin curso Express y Vue (02:24hs).
 - Examen Express y Vue.
 
+04/05
+- Fin del curso MongoDB.
+- Examen MongoDB.
+- Inicio Curso Angular 6 (último curso para completar la Carrera).
+
 Notas:
 
 12/04 
@@ -32,3 +37,6 @@ VueJS: Te subo un poco del proyecto que empecé ahora, porque como te comenté e
 
 27/04
 Express y Vue: Suspendi dos veces este examen (estuve a una pregunta de aprobarlos si no recuerdo mal) por fallar una pregunta que me la marco como mal las dos veces. Era sobre como mostrar en la vista un valor de una variable Data del componente, y lo puse como la suelo usar en el trabajo y me la marco mal, al final la cambié pero estoy seguro de que es como la puse las primera dos veces.
+
+04/05
+Express y Vue: Te subo un PDF detallando la pregunta de examen que te había comentado que estaba mal. Le dejé un comentario en el curso, para ver por donde puedo enviarle la pregunta de examen (ya que el foro es público y no creo que quieran que ponga allí la pregunta), cuando me respondan te informo.
