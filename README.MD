@@ -40,3 +40,8 @@ Express y Vue: Suspendi dos veces este examen (estuve a una pregunta de aprobarl
 
 04/05
 Express y Vue: Te subo un PDF detallando la pregunta de examen que te había comentado que estaba mal. Le dejé un comentario en el curso, para ver por donde puedo enviarle la pregunta de examen (ya que el foro es público y no creo que quieran que ponga allí la pregunta), cuando me respondan te informo.
+
+11/05
+Angular 6: Curso finalizado y examen realizado.
+Carrera TypeScript Profesional: finalizada.
+Express y Vue: Ya les envié la consulta sobre la pregunta del examen a un mail que me dieron, cuando tenga respuesta de él te informo.
